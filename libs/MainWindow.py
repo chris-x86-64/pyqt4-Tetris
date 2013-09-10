@@ -1,4 +1,5 @@
 from PyQt4 import QtGui, QtCore
+from libs.Tetris.Board import Board
 
 class MainWindow(QtGui.QMainWindow):
 	def __init__(self):
@@ -14,6 +15,10 @@ class MainWindow(QtGui.QMainWindow):
 
 		self.setGeometry(300, 300, 180, 380)
 		self.setWindowTitle('Tetris')
+
+		self.tetrisboard = Board(self)
+
+		self.tetrisboard.start()
 		self.center()
 
 	def center(self):
