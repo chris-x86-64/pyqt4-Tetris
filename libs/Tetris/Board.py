@@ -19,3 +19,23 @@ class Board(QtGui.QFrame):
 	def start(self):
 
 		self.timer.start(Board.Speed, self)
+
+	def pause(self):
+
+		"""
+		Allows users to pause the game by pressing a key defined at ${method}.
+		This will cause the timer to stop counting.
+		"""
+
+		if not self.isStarted:
+			return
+
+		self.isPaused = not self.isPaused # Revert its value
+		if self.isPaused:
+			self.timer.stop()
+			self.emit(QtCore.SIGNAL("messageToStatusBar(QString)", "Paused"))
+		else:
+			self.timer.start(Board.Speed, self)
+			self.emit(QtCore.SIGNAL("messageToStatusBar(QString)", "")) # After numLinesRemoved is implemented, make the status bar show it.
+
+		self.update()
