@@ -17,6 +17,10 @@ class MainWindow(QtGui.QMainWindow):
 		self.setWindowTitle('Tetris')
 
 		self.tetrisboard = Board(self)
+		self.setCentralWidget(self.tetrisboard)
+
+		self.statusbar = self.statusBar()
+		self.connect(self.tetrisboard, QtCore.SIGNAL("messageToStatusbar(QString)"), self.statusbar, QtCore.SLOT("showMessage(QString)"))
 
 		self.tetrisboard.start()
 		self.center()
