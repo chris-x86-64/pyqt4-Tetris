@@ -19,6 +19,10 @@ class Board(QtGui.QFrame):
 
 	def start(self):
 
+		"""
+		Starts the timer if not paused.
+		"""
+
 		if self.isPaused:
 			return
 
@@ -44,3 +48,31 @@ class Board(QtGui.QFrame):
 			self.emit(QtCore.SIGNAL("messageToStatusBar(QString)", "")) # After numLinesRemoved is implemented, make the status bar show it.
 
 		self.update()
+
+	def keyPressEvent(self, event):
+
+		"""
+		Handles keypress events.
+		Defines keymap.
+
+		Up/Down = Rotate R/L
+		Left/Right = Move L/R
+		Space = Drop to the bottom
+		D = Drop one line
+		P = Pause game
+		"""
+
+		if not self.isStarted:
+			QtGui.QWidget.keyPressEvent(self, event)
+			return
+
+		pressedKey = event.key()
+
+		if pressedKey == QtCore.Qt.Key_P:
+			self.pause()
+			return
+		if self.isPaused:
+			return
+# Other keys such as U/D/L/R, Space, and D comes here.
+		else:
+			QtGui.QWidget.keyPressEvent(self, event)
