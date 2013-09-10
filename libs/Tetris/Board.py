@@ -14,10 +14,15 @@ class Board(QtGui.QFrame):
 
 		QtGui.QFrame.__init__(self, parent)
 
+		self.isPaused = False
 		self.timer = QtCore.QBasicTimer()
 
 	def start(self):
 
+		if self.isPaused:
+			return
+
+		self.isStarted = True
 		self.timer.start(Board.Speed, self)
 
 	def pause(self):
