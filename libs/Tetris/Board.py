@@ -1,5 +1,5 @@
 from PyQt4 import QtGui, QtCore
-from libs.Tetris.Tetrominoes import Tetrominoes
+from libs.Tetris.Shape import Shape, Tetrominoes
 
 class Board(QtGui.QFrame):
 	BoardWidth = 10  # This defines the width of the game board (10 blocks)
@@ -10,17 +10,28 @@ class Board(QtGui.QFrame):
 
 		"""
 		Initializes QFrame.
+		Initializes attributes.
 		Sets timer.
 		"""
 
 		QtGui.QFrame.__init__(self, parent)
 
-		self.setFocusPolicy(QtCore.Qt.StrongFocus)
+		self.timer = QtCore.QBasicTimer()
+
+# begin: attributes
+		self.isWaitingAfterLine = False
+		self.curPiece = Shape()
+		self.nextPiece = Shape()
+		self.curX = 0
+		self.curY = 0
+		self.numLinesRemoved = 0
 		self.isStarted = False
 		self.isPaused = False
-		self.numLinesRemoved = 0
 		self.board = []
-		self.timer = QtCore.QBasicTimer()
+# end: attributes
+
+		self.clearBoard()
+		self.setFocusPolicy(QtCore.Qt.StrongFocus)
 
 	def start(self):
 
