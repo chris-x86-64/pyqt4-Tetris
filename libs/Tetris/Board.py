@@ -1,9 +1,16 @@
 from PyQt4 import QtGui, QtCore
+import yaml
 from libs.Tetris.Shape import Shape
 from libs.keymap import keyPressEvent
 from libs.Tetris.Rendering import Rendering
 
+class Config():
+	config = yaml.load(open('config.yml'))
+	Speed = config['speed']
+
 class Board(QtGui.QFrame, keyPressEvent, Rendering):
+
+	config = yaml.load(open('config.yml'))
 
 	def __init__(self, parent):
 
@@ -20,7 +27,7 @@ class Board(QtGui.QFrame, keyPressEvent, Rendering):
 # begin: attributes
 		self.BoardWidth = 10  # This defines the width of the game board (10 blocks)
 		self.BoardHeight = 22 # This defines the height of the game board (22 blocks)
-		self.Speed = 300 # This defines the game's speed (300 milliseconds)
+		self.Speed = Config.Speed # This defines the game's speed (300 milliseconds)
 		self.isWaitingAfterLine = False
 		self.curPiece = Shape()
 		self.nextPiece = Shape()

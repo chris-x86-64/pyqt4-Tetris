@@ -1,0 +1,7 @@
+---
+
+# pyqt4-Tetris configuration file
+
+speed: 500 # Milliseconds
+
+...
