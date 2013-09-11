@@ -14,6 +14,8 @@ class Board(QtGui.QFrame):
 
 		QtGui.QFrame.__init__(self, parent)
 
+		self.setFocusPolicy(QtCore.Qt.StrongFocus)
+		self.isStarted = False
 		self.isPaused = False
 		self.timer = QtCore.QBasicTimer()
 
@@ -42,10 +44,10 @@ class Board(QtGui.QFrame):
 		self.isPaused = not self.isPaused # Revert its value
 		if self.isPaused:
 			self.timer.stop()
-			self.emit(QtCore.SIGNAL("messageToStatusbar(QString)", "Paused"))
+			self.emit(QtCore.SIGNAL("messageToStatusbar(QString)"), "Paused")
 		else:
 			self.timer.start(Board.Speed, self)
-			self.emit(QtCore.SIGNAL("messageToStatusbar(QString)", "")) # After numLinesRemoved is implemented, make the status bar show it.
+			self.emit(QtCore.SIGNAL("messageToStatusbar(QString)"), "") # After numLinesRemoved is implemented, make the status bar show it.
 
 		self.update()
 
