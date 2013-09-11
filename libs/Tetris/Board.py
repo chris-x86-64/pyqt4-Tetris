@@ -33,6 +33,7 @@ class Board(QtGui.QFrame, keyPressEvent):
 
 		self.clearBoard()
 		self.setFocusPolicy(QtCore.Qt.StrongFocus)
+		self.nextPiece.setRandomShape()
 
 	def start(self):
 
