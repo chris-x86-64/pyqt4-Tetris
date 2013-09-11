@@ -9,3 +9,7 @@ class Shape(object):
 		((1, -1),   (0, -1),   (0, 0),    (0, 1)),  # LShape
 		((-1, -1),  (0, -1),   (0, 0),    (0, 1)),  # MirroredLShape
 	)
+
+	def __init__(self):
+		self.coords = [ [0, 0] for i in range(4) ]
+		self.pieceShape = Tetrominoes.NoShape
