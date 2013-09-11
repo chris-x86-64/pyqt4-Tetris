@@ -1,3 +1,5 @@
+from random import randint
+
 class Tetrominoes(object):
 
 	"""
@@ -52,3 +54,6 @@ class Shape(object):
 				self.coords[i][j] = arrangement[i][j]
 
 		self.pieceShape = shape
+
+	def setRandomShape(self):
+		self.setShape(randint(1, 7))
