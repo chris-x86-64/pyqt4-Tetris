@@ -1,11 +1,9 @@
 from PyQt4 import QtGui, QtCore
-from libs.Tetris.Shape import Shape, Tetrominoes
+from libs.Tetris.Shape import Shape
 from libs.keymap import keyPressEvent
+from libs.Tetris.Rendering import Rendering
 
-class Board(QtGui.QFrame, keyPressEvent):
-	BoardWidth = 10  # This defines the width of the game board (10 blocks)
-	BoardHeight = 22 # This defines the height of the game board (22 blocks)
-	Speed = 300 # This defines the game's speed (300 milliseconds)
+class Board(QtGui.QFrame, keyPressEvent, Rendering):
 
 	def __init__(self, parent):
 
@@ -20,6 +18,9 @@ class Board(QtGui.QFrame, keyPressEvent):
 		self.timer = QtCore.QBasicTimer()
 
 # begin: attributes
+		self.BoardWidth = 10  # This defines the width of the game board (10 blocks)
+		self.BoardHeight = 22 # This defines the height of the game board (22 blocks)
+		self.Speed = 300 # This defines the game's speed (300 milliseconds)
 		self.isWaitingAfterLine = False
 		self.curPiece = Shape()
 		self.nextPiece = Shape()
@@ -48,7 +49,9 @@ class Board(QtGui.QFrame, keyPressEvent):
 		self.numLinesRemoved = 0
 
 		self.emit(QtCore.SIGNAL("messageToStatusbar(QString)"), str(self.numLinesRemoved))
-		self.timer.start(Board.Speed, self)
+
+		self.newPiece()
+		self.timer.start(self.Speed, self)
 
 	def pause(self):
 
@@ -65,12 +68,7 @@ class Board(QtGui.QFrame, keyPressEvent):
 			self.timer.stop()
 			self.emit(QtCore.SIGNAL("messageToStatusbar(QString)"), "Paused")
 		else:
-			self.timer.start(Board.Speed, self)
+			self.timer.start(self.Speed, self)
 			self.emit(QtCore.SIGNAL("messageToStatusbar(QString)"), str(self.numLinesRemoved))
 
 		self.update()
-
-	def clearBoard(self):
-		for i in range(Board.BoardHeight * Board.BoardWidth):
-			self.board.append(Tetrominoes.NoShape)
-
