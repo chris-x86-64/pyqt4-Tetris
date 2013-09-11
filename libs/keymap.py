@@ -25,6 +25,17 @@ class keyPressEvent():
 			return
 		if self.isPaused:
 			return
-# Other keys such as U/D/L/R, Space, and D comes here.
+		elif pressedKey == QtCore.Qt.Key_Left:
+			self.tryMove(self.curPiece, self.curX - 1, self.curY)
+		elif pressedKey == QtCore.Qt.Key_Right:
+			self.tryMove(self.curPiece, self.curX + 1, self.curY)
+		elif pressedKey == QtCore.Qt.Key_Down:
+			self.tryMove(self.curPiece.rotateRight(), self.curX, self.curY)
+		elif pressedKey == QtCore.Qt.Key_Up:
+			self.tryMove(self.curPiece.rotateLeft(), self.curX, self.curY)
+		elif pressedKey == QtCore.Qt.Key_Space:
+			self.dropDown()
+		elif pressedKey == QtCore.Qt.Key_D:
+			self.oneLineDown()
 		else:
 			QtGui.QWidget.keyPressEvent(self, event)
