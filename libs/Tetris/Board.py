@@ -1,7 +1,8 @@
 from PyQt4 import QtGui, QtCore
 from libs.Tetris.Shape import Shape, Tetrominoes
+from libs.keymap import keyPressEvent
 
-class Board(QtGui.QFrame):
+class Board(QtGui.QFrame, keyPressEvent):
 	BoardWidth = 10  # This defines the width of the game board (10 blocks)
 	BoardHeight = 22 # This defines the height of the game board (22 blocks)
 	Speed = 300 # This defines the game's speed (300 milliseconds)
@@ -72,30 +73,3 @@ class Board(QtGui.QFrame):
 		for i in range(Board.BoardHeight * Board.BoardWidth):
 			self.board.append(Tetrominoes.NoShape)
 
-	def keyPressEvent(self, event):
-
-		"""
-		Handles keypress events.
-		Defines keymap.
-
-		Up/Down = Rotate R/L
-		Left/Right = Move L/R
-		Space = Drop to the bottom
-		D = Drop one line
-		P = Pause game
-		"""
-
-		if not self.isStarted:
-			QtGui.QWidget.keyPressEvent(self, event)
-			return
-
-		pressedKey = event.key()
-
-		if pressedKey == QtCore.Qt.Key_P:
-			self.pause()
-			return
-		if self.isPaused:
-			return
-# Other keys such as U/D/L/R, Space, and D comes here.
-		else:
-			QtGui.QWidget.keyPressEvent(self, event)
