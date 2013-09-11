@@ -61,7 +61,7 @@ class Rendering():
 		if self.curPiece.shape() != Tetrominoes.NoShape:
 			for i in range(4):
 				x = self.curX + self.curPiece.x(i)
-				y = self.curY + self.curPiece.y(i)
+				y = self.curY - self.curPiece.y(i)
 				self.drawSquare(painter,
 					rect.left() + x * self.squareWidth(),
 					boardTop + (self.BoardHeight - y - 1) * self.squareHeight(),
@@ -156,7 +156,7 @@ class Rendering():
 	def tryMove(self, newPiece, newX, newY):
 		for i in range(4):
 			x = newX + newPiece.x(i)
-			y = newY + newPiece.y(i)
+			y = newY - newPiece.y(i)
 			if x < 0 or x >= self.BoardWidth or y < 0 or y >= self.BoardHeight:
 				return False
 			if self.shapeLocation(x, y) != Tetrominoes.NoShape:
