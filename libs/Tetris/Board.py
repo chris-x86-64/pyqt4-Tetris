@@ -19,6 +19,7 @@ class Board(QtGui.QFrame):
 		self.isStarted = False
 		self.isPaused = False
 		self.numLinesRemoved = 0
+		self.board = []
 		self.timer = QtCore.QBasicTimer()
 
 	def start(self):
