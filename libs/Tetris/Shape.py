@@ -32,3 +32,6 @@ class Shape(object):
 	def __init__(self):
 		self.coords = [ [0, 0] for i in range(4) ]
 		self.pieceShape = Tetrominoes.NoShape
+
+	def shape(self):
+		return self.pieceShape
