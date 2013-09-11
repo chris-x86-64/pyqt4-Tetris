@@ -129,6 +129,12 @@ class Rendering():
 		self.curX = self.BoardWidth / 2 + 1
 		self.curY = self.BoardHeight - 1 + self.curPiece.minY()
 
+		if not self.tryMove(self.curPiece, self.curX, self.curY):
+			self.curPiece.setShape(Tetrominoes.NoShape)
+			self.timer.stop()
+			self.isStarted = False
+			self.emit(QtCore.SIGNAL("messageToStatusbar(QString)"), "GAME OVER")
+
 	def drawSquare(self, painter, x, y, shape):
 		colorTable = [
 			0x000000,
