@@ -5,6 +5,7 @@ class Rendering():
 
 	"""
 	This class defines rednering.
+	timerEvent()
 	shapeLocation()
 	setShapeLocation()
 	squareWidth()
@@ -19,6 +20,16 @@ class Rendering():
 	tryMove()
 	drawSquare()
 	"""
+
+	def timerEvent(self, event):
+		if event.timerId() == self.timer.timerId():
+			if self.isWaitingAfterLine:
+				self.isWaitingAfterLine = False
+				self.newPiece()
+			else:
+				self.oneLineDown()
+		else:
+			QtGui.QFrame.timerEvent(self, event)
 
 	def shapeLocation(self, x, y):
 		return self.board[(y * self.BoardWidth) + x]
