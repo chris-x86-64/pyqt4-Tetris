@@ -57,3 +57,67 @@ class Shape(object):
 
 	def setRandomShape(self):
 		self.setShape(randint(1, 7))
+
+	def x(self, index):
+		return self.coords[index][0]
+
+	def y(self, index):
+		return self.coords[index][1]
+
+	def setX(self, index, x):
+		self.coords[index][0] = x
+
+	def setY(self, index, y):
+		self.coords[index][1] = y
+
+	def minX(self):
+		m = self.coords[0][0]
+		for i in range(4):
+			m = min(m, self.coords[i][0])
+
+		return m
+
+	def minY(self):
+		m = self.coords[0][1]
+		for i in range(4):
+			m = min(m, self.coords[i][1])
+
+		return m
+
+	def maxX(self):
+		m = self.coords[0][0]
+		for i in range(4):
+			m = max(m, self.coords[i][0])
+
+		return m
+
+	def maxY(self):
+		m = self.coords[0][1]
+		for i in range(4):
+			m = max(m, self.coords[i][1])
+
+		return m
+
+	def rotateLeft(self):
+		if self.pieceShape == Tetrominoes.SquareShape:
+			return self # There's no need to rotate SquareShape because the result will be the exact same shape.
+
+		result = Shape()
+		result.pieceShape = self.pieceShape
+		for i in range(4):
+			result.setX(i, self.y(i))
+			result.setY(i, -self.x(i))
+
+		return result
+
+	def rotateRight(self):
+		if self.pieceShape == Tetrominoes.SquareShape:
+			return self # There's no need to rotate SquareShape because the result will be the exact same shape.
+
+		result = Shape()
+		result.pieceShape = self.pieceShape
+		for i in range(4):
+			result.setX(i, -self.y(i))
+			result.setY(i, self.x(i))
+
+		return result
