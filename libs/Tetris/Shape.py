@@ -1,4 +1,13 @@
 class Tetrominoes(object):
+
+	"""
+	Defines each shape's name and No. so human reads the name while the program reads the numeric id.
+	The numbers are also used as the index for tuple 'Shape.coordTable'
+
+	For example, Shape.coordsTable[Tetrominoes.TShape] will point to Shape.coordsTable[5],
+	which will return ((-1, 0),   (0, 0),    (1, 0),    (0, 1))
+	"""
+
 	NoShape = 0
 	ZShape = 1
 	SShape = 2
