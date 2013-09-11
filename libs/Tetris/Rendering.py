@@ -153,3 +153,18 @@ class Rendering():
 		painter.drawLine(x, y + self.squareHeight() - 1, x, y)
 		painter.drawLine(x, y, x + self.squareWidth() - 1, y)
 
+	def tryMove(self, newPiece, newX, newY):
+		for i in range(4):
+			x = newX + newPiece.x(i)
+			y = newY + newPiece.y(i)
+			if x < 0 or x >= self.BoardWidth or y < 0 or y >= self.BoardHeight:
+				return False
+			if self.shapeLocation(x, y) != Tetrominoes.NoShape:
+				return False
+
+		self.curPiece = newPiece
+		self.curX = newX
+		self.curY = newY
+		self.update()
+
+		return True
