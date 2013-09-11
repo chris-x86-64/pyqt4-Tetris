@@ -1,4 +1,5 @@
 from PyQt4 import QtGui, QtCore
+from libs.Tetris.Tetrominoes import Tetrominoes
 
 class Board(QtGui.QFrame):
 	BoardWidth = 10  # This defines the width of the game board (10 blocks)
@@ -54,6 +55,10 @@ class Board(QtGui.QFrame):
 			self.emit(QtCore.SIGNAL("messageToStatusbar(QString)"), str(self.numLinesRemoved))
 
 		self.update()
+
+	def clearBoard(self):
+		for i in range(Board.BoardHeight * Board.BoardWidth):
+			self.board.append(Tetrominoes.NoShape)
 
 	def keyPressEvent(self, event):
 
