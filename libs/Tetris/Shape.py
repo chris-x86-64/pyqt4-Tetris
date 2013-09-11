@@ -35,3 +35,19 @@ class Shape(object):
 
 	def shape(self):
 		return self.pieceShape
+
+	def setShape(self, shape):
+
+		"""
+		Reads arrangement data from Shape.coordsTable of the 
+		specified shape defined via the argument 'shape',
+		then set self.coords[i][j] to the shape's arrangement.
+		"""
+
+		arrangement = Shape.coordsTable[shape]
+
+		for i in range(4):
+			for j in range(2):
+				self.coords[i][j] = arrangement[i][j]
+
+		self.pieceShape = shape
