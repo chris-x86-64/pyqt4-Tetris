@@ -46,7 +46,10 @@ class Board(QtGui.QFrame, keyPressEvent, Rendering):
 			return
 
 		self.isStarted = True
+		self.isWaitingAfterLine = False
 		self.numLinesRemoved = 0
+
+		self.clearBoard()
 
 		self.emit(QtCore.SIGNAL("messageToStatusbar(QString)"), str(self.numLinesRemoved))
 
