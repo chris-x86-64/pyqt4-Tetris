@@ -133,7 +133,7 @@ class Rendering():
 			self.curPiece.setShape(Tetrominoes.NoShape)
 			self.timer.stop()
 			self.isStarted = False
-			self.emit(QtCore.SIGNAL("messageToStatusbar(QString)"), "GAME OVER")
+			self.emit(QtCore.SIGNAL("messageToStatusbar(QString)"), "Game over! Score: " + str(self.numLinesRemoved))
 
 	def drawSquare(self, painter, x, y, shape):
 		colorTable = [
